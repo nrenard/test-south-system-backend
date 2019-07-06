@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const UserSchema = new mongoose.Schema({
+const officialsSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
     lowercase: true,
+  },
+  permissions: {
+    type: Number,
+    required: true,
   },
   password: {
     type: String,
@@ -23,7 +27,7 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-UserSchema.pre('save', async function (next) {
+officialsSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10);
   }
@@ -31,13 +35,18 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
-UserSchema.methods = {
-  compareHase(password) {
+officialsSchema.methods = {
+  compareHash(password) {
     return bcrypt.compare(password, this.password);
+  },
+  toJSON() {
+    const oficial = this.toObject();
+    delete oficial.password;
+    return oficial;
   },
 };
 
-UserSchema.statics = {
+officialsSchema.statics = {
   generateToken({ id }) {
     return jwt.sign({ id }, process.env.APP_SECRET, {
       expiresIn: 86400,
@@ -45,4 +54,4 @@ UserSchema.statics = {
   },
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Officials', officialsSchema);

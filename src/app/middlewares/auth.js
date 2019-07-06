@@ -14,9 +14,9 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    const { id } = await jwt.verify(token, process.env.SECRET);
+    const { id } = await jwt.verify(token, process.env.APP_SECRET);
 
-    req.userId = id;
+    req.officialId = id;
 
     return next();
   } catch (err) {

@@ -8,6 +8,7 @@ class Server {
   constructor() {
     this.express = express();
     this.isDev = process.env.NODE_ENV === 'development';
+    this.isTest = process.env.NODE_ENV === 'test';
 
     this.middlewares();
     this.database();
@@ -20,13 +21,15 @@ class Server {
   }
 
   database() {
-    mongoose.connect(
-      process.env.DB_URL,
-      {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-      },
-    );
+    if (!this.isTest) {
+      mongoose.connect(
+        process.env.DB_URL,
+        {
+          useCreateIndex: true,
+          useNewUrlParser: true,
+        },
+      );
+    }
   }
 
   routes() {
