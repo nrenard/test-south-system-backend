@@ -31,7 +31,7 @@ yarn test
 yarn coverage
 ```
 
-### Micro documentação
+## Micro documentação
 
 #### Autenticação service
 
@@ -52,6 +52,6 @@ yarn coverage
 #### Funcionários service
 
 ```
-/officials - método `get` parar os funcionários.
+/officials - método `get` para listar os funcionários.
 /officials - método `post` para cadastrar um funcionário.
 ```
