@@ -1,5 +1,3 @@
-# Demo
-
 Demonstração do exercício [aqui](https://api-nrenard.herokuapp.com).
 
 # Instalação
