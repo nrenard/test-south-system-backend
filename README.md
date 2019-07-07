@@ -34,13 +34,13 @@ yarn coverage
 #### Autenticação service
 
 ```
-/session - método `post` para gerar um token.
+/session - método *post* para gerar um token.
 ```
 
 #### Produtos service
 
 ```
-/products - método `get` para listar os produtos.
+/products - método *get* para listar os produtos.
 /products - método `post` para cadastrar um produto.
 /products/:id - método `get` para ver um produtos.
 /products/:id - método `delete` para deletar um produtos.
