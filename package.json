@@ -30,15 +30,12 @@
     "start": "node src",
     "dev": "nodemon src --ignore __tests__",
     "test": "NODE_ENV=test jest --watchAll --verbose",
-    "coverage": "jest --watchAll --coverage",
+    "coverage": "NODE_ENV=test jest --watchAll --coverage",
     "prepush-test": "NODE_ENV=test jest"
   },
   "husky": {
     "hooks": {
       "pre-push": "npm run prepush-test"
     }
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setupTest.js"
   }
 }

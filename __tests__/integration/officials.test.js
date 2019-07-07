@@ -2,12 +2,12 @@ const request = require('supertest');
 
 const server = require('../../src/server');
 
+const factory = require('../factories');
 const dbConnection = require('../utils/dbConnection');
 const truncate = require('../utils/truncate');
 
 describe('Officials', () => {
   beforeAll(async () => {
-    console.log('beforeAll');
     dbConnection();
     await truncate();
   });
@@ -69,36 +69,22 @@ describe('Officials', () => {
     expect(second.status).toBe(401);
   });
 
-  it('should be able to find officials, with authenticated manager', async () => {
-    const first = await request(server)
-      .post('/officials')
-      .send({
-        email: 'teste2@gmail.com',
-        name: 'Nicolas Renard',
-        permissions: 2,
-        password: '123456',
-      });
+  it('should be able acess to officials', async () => {
+    const official = await factory.create('Official', {
+      password: '123456',
+    });
 
-    console.log('first: ', first.body);
-
-    const second = await request(server)
+    const authenticated = await request(server)
       .post('/session')
       .send({
-        email: first.email,
+        email: official.email,
         password: '123456',
       });
 
-    const third = await request(server)
+    const response = await request(server)
       .get('/officials')
-      .set('Authentication', `Bearer ${second.body.token}`);
+      .set('Authorization', `Bearer ${authenticated.body.token}`);
 
-    expect(third.status).toBe(200);
-  });
-
-  it('should be not able to find officials, with not authenticated.', async () => {
-    const third = await request(server)
-      .get('/officials');
-
-    expect(third.status).toBe(401);
+    expect(response.status).toBe(200);
   });
 });

@@ -16,8 +16,6 @@ routes.post('/', ProductsSchema.store, ProductsController.store);
 routes.put('/:id', ProductsSchema.update, ProductsController.update);
 routes.delete('/:id', ProductsSchema.destroy, ProductsController.destroy);
 
-routes.use(verifyPermissions.highPermission);
-
-routes.get('/', ProductsSchema.index, ProductsController.index);
+routes.get('/', ProductsSchema.index, verifyPermissions.highPermission, ProductsController.index);
 
 module.exports = routes;

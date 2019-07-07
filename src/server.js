@@ -17,11 +17,12 @@ class Server {
 
   middlewares() {
     this.express.use(express.json());
-    this.express.use(morgan(this.isDev ? 'dev' : 'common'));
+    if (!this.isTest) this.express.use(morgan(this.isDev ? 'dev' : 'common'));
   }
 
   database() {
     if (!this.isTest) {
+      console.log('eeea');
       mongoose.connect(
         process.env.DB_URL,
         {

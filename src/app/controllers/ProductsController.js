@@ -8,13 +8,14 @@ class ProductsController {
         price_max: priceMax,
         page = 1,
         title,
+        per_page = 5,
       } = req.query;
 
       const filters = {};
 
       const options = {
         sort: '-createdAt',
-        limit: 5,
+        limit: Number(per_page),
         populate: ['author'],
         page: page < 1 ? 1 : page,
       };
@@ -73,7 +74,7 @@ class ProductsController {
 
       if (!product) return res.status(404).json({ message: 'Product does not exist.' });
 
-      await Products.findOneAndUpdate({ _id: req.params.id }, req.body);
+      await Products.updateOne({ _id: req.params.id }, req.body);
 
       return res.json({ sucess: true });
     } catch (err) {
