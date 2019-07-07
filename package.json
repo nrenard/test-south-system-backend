@@ -30,12 +30,11 @@
     "start": "node src",
     "dev": "nodemon src --ignore __tests__",
     "test": "NODE_ENV=test jest --watchAll --verbose",
-    "coverage": "NODE_ENV=test jest --watchAll --coverage",
-    "prepush-test": "NODE_ENV=test jest"
+    "coverage": "NODE_ENV=test jest --watchAll --coverage"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run prepush-test"
+      "pre-push": "NODE_ENV=test jest"
     }
   }
 }
