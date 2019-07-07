@@ -3,6 +3,7 @@ const Officials = require('../models/Officials');
 const MAP_POSITIONS = {
   MANAGER: 2,
   COLLABORATOR: 1,
+  USER: 0,
 };
 
 class OfficialsController {

@@ -29,7 +29,7 @@ yarn test
 yarn coverage
 ```
 
-## Micro documentação
+## Documentação
 
 #### Autenticação service
 

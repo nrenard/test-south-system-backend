@@ -7,7 +7,7 @@ class OfficialsSchema extends RouteValidator {
       body: Joi.object().keys({
         name: Joi.string().required(),
         email: Joi.string().required(),
-        permissions: Joi.number().required(),
+        permissions: Joi.number().max(2).required(),
         password: Joi.string().required(),
       }),
     };
