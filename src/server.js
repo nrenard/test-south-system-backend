@@ -22,7 +22,6 @@ class Server {
 
   database() {
     if (!this.isTest) {
-      console.log('eeea');
       mongoose.connect(
         process.env.DB_URL,
         {

@@ -11,7 +11,6 @@ class OfficialsController {
       const officials = await Officials.find();
       return res.json(officials);
     } catch (err) {
-      console.log('err: ', err);
       return res.status(500).json({ message: 'An error occurred on the server.' });
     }
   }
