@@ -30,3 +30,28 @@ yarn test
 ```
 yarn coverage
 ```
+
+### Micro documentação
+
+#### Autenticação service
+
+```
+/session - método `post` para gerar um token.
+```
+
+#### Produtos service
+
+```
+/products - método `get` para listar os produtos.
+/products - método `post` para cadastrar um produto.
+/products/:id - método `get` para ver um produtos.
+/products/:id - método `delete` para deletar um produtos.
+/products/:id - método `put` para editer um produtos.
+```
+
+#### Funcionários service
+
+```
+/officials - método `get` parar os funcionários.
+/officials - método `post` para cadastrar um funcionário.
+```
