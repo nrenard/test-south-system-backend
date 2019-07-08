@@ -26,7 +26,7 @@ class Server {
 
       // swagger config
       const options = { customCss: '.swagger-ui .try-out { display: none }' };
-      this.express.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+      this.express.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
     }
   }
 

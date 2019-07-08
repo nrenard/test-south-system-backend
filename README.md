@@ -1,4 +1,4 @@
-Demonstração do exercício [aqui](https://api-nrenard.herokuapp.com).
+Demonstração do exercício [aqui](https://api-nrenard.herokuapp.com/docs).
 
 # Instalação
 
