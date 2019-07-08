@@ -30,7 +30,7 @@ class OfficialsController {
       }
 
       const newOfficial = await Officials.create(req.body);
-      return res.json(newOfficial);
+      return res.status(201).json(newOfficial);
     } catch (err) {
       return res.status(500).json({ message: 'An error occurred on the server.' });
     }

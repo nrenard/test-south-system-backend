@@ -4,11 +4,7 @@ class ProductsController {
   static async index(req, res) {
     try {
       const {
-        price_min: priceMin,
-        price_max: priceMax,
-        page = 1,
-        title,
-        per_page = 5,
+        price_min: priceMin, price_max: priceMax, page = 1, title, per_page = 5,
       } = req.query;
 
       const filters = {};
@@ -62,7 +58,7 @@ class ProductsController {
   static async store(req, res) {
     try {
       const product = await Products.create({ ...req.body, author: req.officialId });
-      return res.json(product);
+      return res.status(201).json(product);
     } catch (err) {
       return res.status(500).json({ message: 'An error occurred on the server.' });
     }

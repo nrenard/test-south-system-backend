@@ -6,7 +6,6 @@ const factory = require('../factories');
 const dbConnection = require('../utils/dbConnection');
 const truncate = require('../utils/truncate');
 
-
 describe('Product', () => {
   const password = '123456';
 
@@ -46,6 +45,15 @@ describe('Product', () => {
       })
       .set('Authorization', `Bearer ${authenticated.body.token}`);
 
+    expect(response.status).toBe(201);
+  });
+
+  it('should be able to view product without being authenticated', async () => {
+    const official = await factory.create('Official');
+    const product = await factory.create('Product', { author: official._id });
+
+    const response = await request(server).get(`/products/${product._id}`);
+
     expect(response.status).toBe(200);
   });
 
@@ -53,18 +61,7 @@ describe('Product', () => {
     const official = await factory.create('Official');
     const product = await factory.create('Product', { author: official._id });
 
-    const response = await request(server)
-      .get(`/products/${product._id}`);
-
-    expect(response.status).toBe(200);
-  });
-
-  it('should be able to view product without being authenticated', async () => {
-    const official = await factory.create('Official');
-    const product = await factory.create('Product', { author: official._id });
-
-    const response = await request(server)
-      .get(`/products/${product._id}`);
+    const response = await request(server).get(`/products/${product._id}`);
 
     expect(response.status).toBe(200);
   });

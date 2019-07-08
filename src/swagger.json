@@ -1,0 +1,420 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Service products",
+    "description": "",
+    "version": "1.0"
+  },
+  "host": "https://api-nrenard.herokuapp.com/",
+  "produces": ["application/json"],
+  "paths": {
+    "/session": {
+      "post": {
+        "tags": ["/session"],
+        "summary": "Método para gerar um token de autenticação.",
+        "parameters": {
+          "name": "titulo",
+          "in": "formData",
+          "required": true,
+          "type": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "application/json": "{ \n\ttitulo: 'Filme 1', \n\tdiretor: 'Diretor X', \n\testoque: 20 \n}, \n{ \n\ttitulo: 'Filme 2', \n\tdiretor: 'Diretor Y', \n\testoque: 50 \n}"
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "examples": {
+              "application/json": "{ message: 'An error occurred on the server.' }"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Método para gerar um token de autenticação.",
+        "tags": ["/session"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "application/json": "{ success: true, id: 1 }"
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "examples": {
+              "application/json": "{ success: false, message: 'Falha ao cadastrar filme.' }"
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": ["/products"],
+        "summary": "Método para listar os produtos",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "status": {
+                    "type": "boolean"
+                  },
+                  "author": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "examples": {
+              "application/json": "{ message: 'An error occurred on the server.' }"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cadastra um novo produto.",
+        "tags": ["/products"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "author",
+            "in": "formData",
+            "required": true,
+            "type": "objectId"
+          },
+          {
+            "name": "status",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "status": {
+                  "type": "boolean"
+                },
+                "author": {
+                  "type": "object"
+                }
+              }
+            },
+            "examples": {
+              "application/json": "{ success: true, id: 1 }"
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "examples": {
+              "application/json": "{ success: false, message: 'Falha ao cadastrar diretor.' }"
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": ["/products"],
+        "summary": "Retorna o produto do id.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Se informado objectId.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "status": {
+                  "type": "boolean"
+                },
+                "author": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Se produto não existir ou não estiver ativo.",
+            "examples": {
+              "application/json": "{ message: 'Product does not active.' }"
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "examples": {
+              "application/json": "{ success: false, message: 'Falha ao buscar diretor por ID.' }"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["/products"],
+        "summary": "Deleta o produto do id.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Se informado o objectId.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "examples": {
+              "application/json": "{ success: 0, }"
+            }
+          },
+          "404": {
+            "description": "Se produto não existir.",
+            "examples": {
+              "application/json": "{ message: 'Product does not exist.' }"
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "examples": {
+              "application/json": "{ success: false, message: 'Falha ao deletar diretor.' }"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza o produto.",
+        "tags": ["/products"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/officials": {
+      "get": {
+        "summary": "Lista os funcunaŕios.",
+        "tags": ["/officials"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "permissions": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno",
+            "examples": {
+              "application/json": "{ success: false, message: 'E-mail informado já existe.' }"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cadastra um novo produto.",
+        "tags": ["/officials"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "permissions",
+            "in": "formData",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "permissions": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Funciário já existe."
+          },
+          "401": {
+            "description": "Gerente já existe."
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    }
+  }
+}

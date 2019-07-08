@@ -22,7 +22,7 @@ describe('Officials', () => {
         password: '123456',
       });
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
   });
 
   it('should be not able create two officials for one email', async () => {

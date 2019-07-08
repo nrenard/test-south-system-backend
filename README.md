@@ -14,7 +14,7 @@ yarn start
 
 Temos dois usuários já cadastrados no banco.
 
-email: `manager@southsystem.com` password: `123456`  
+email: `manager@southsystem.com` password: `123456`
 email: `collaborator@southsystem.com` password: `123456`
 
 ## Para rodar os testes
@@ -27,29 +27,4 @@ yarn test
 
 ```
 yarn coverage
-```
-
-## Documentação
-
-#### Autenticação service
-
-```
-/session - método post para gerar um token.
-```
-
-#### Produtos service
-
-```
-/products - método get para listar os produtos.
-/products - método post para cadastrar um produto.
-/products/:id - método get para ver um produtos.
-/products/:id - método delete para deletar um produtos.
-/products/:id - método put para editer um produtos.
-```
-
-#### Funcionários service
-
-```
-/officials - método get para listar os funcionários.
-/officials - método post para cadastrar um funcionário.
 ```
